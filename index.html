@@ -32,6 +32,7 @@
             margin-bottom: 15px;
             font-weight: bold;
             letter-spacing: 1px;
+            text-shadow: 0 0 5px #38bdf8;
         }
         .game-area { 
             position: relative; 
@@ -53,10 +54,31 @@
             justify-content: center; align-items: center;
             z-index: 10;
             text-align: center;
+            border-radius: 8px;
         }
         #overlay.hidden { display: none; }
         h2 { text-shadow: 0 0 10px #38bdf8; margin: 0; font-size: 24px; }
         p { color: #64748b; font-size: 14px; margin-top: 8px; }
+
+        /* YENİ APK BUTONU TASARIMI */
+        .btn-download {
+            margin-top: 20px;
+            display: inline-block;
+            color: #38bdf8;
+            text-decoration: none;
+            border: 2px solid #38bdf8;
+            padding: 10px 18px;
+            border-radius: 5px;
+            font-weight: bold;
+            font-size: 13px;
+            transition: 0.3s;
+            text-shadow: 0 0 5px #38bdf8;
+            box-shadow: 0 0 10px rgba(56, 189, 248, 0.2);
+        }
+        .btn-download:active {
+            background: #38bdf8;
+            color: #000;
+        }
     </style>
 </head>
 <body>
@@ -72,7 +94,12 @@
     <div id="overlay">
       <h2 id="title">CYBER SNAKE</h2>
       <p>BAŞLAMAK İÇİN EKRANI KAYDIRIN</p>
-      <p style="font-size: 10px; margin-top: 20px; color: #38bdf8;">Purpleguy © 2026</p>
+      
+      <a href="https://github.com/aftonpurpleguy560-byte/Cyber-Snake/releases/download/v1.0/Cyber_Snake_signed.apk" class="btn-download">
+         ANDROID APK (BETA) İNDİR
+      </a>
+
+      <p style="font-size: 10px; margin-top: 20px; color: #38bdf8; opacity: 0.8;">Purpleguy © 2026 - tablet power</p>
     </div>
   </div>
 </div>
@@ -196,4 +223,3 @@ init(); loop();
 
 </body>
 </html>
-
