@@ -1,9 +1,9 @@
-/* CYBER SNAKE - GÖRSEL TASARIM v1.2
+/* CYBER SNAKE - GÖRSEL TASARIM v1.3
    Purpleguy © 2026 - tablet power 
 */
 
 body {
-    background: #020617; /* Siyah arka plan */
+    background: #000; /* İstediğin gibi zifiri siyah */
     margin: 0;
     padding: 0;
     display: flex;
@@ -24,7 +24,7 @@ body {
     max-width: 400px;
 }
 
-/* Skor Tablosu */
+/* HUD (Skor, Para ve Rekor Alanı) */
 .hud {
     display: flex;
     justify-content: space-between;
@@ -32,6 +32,13 @@ body {
     margin-bottom: 10px;
     font-weight: bold;
     text-shadow: 0 0 5px #38bdf8;
+    font-size: 11px;
+    letter-spacing: 1px;
+}
+
+.money-val {
+    color: #fbbf24; /* Para rengi altın sarısı */
+    text-shadow: 0 0 8px #fbbf24;
 }
 
 .game-area {
@@ -47,17 +54,17 @@ canvas {
     width: 100%;
     height: 100%;
     border-radius: 8px;
-    box-shadow: 0 0 20px rgba(56, 189, 248, 0.1);
+    box-shadow: 0 0 20px rgba(56, 189, 248, 0.15);
 }
 
-/* Menü Katmanları (Ana Menü ve Ayarlar) */
+/* Menü Katmanları (Ana Menü, Market, Ayarlar) */
 .menu-layer {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.92);
+    background: rgba(0, 0, 0, 0.95); /* Menü açılınca arka plan daha koyu */
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -74,7 +81,7 @@ canvas {
 h2 {
     text-shadow: 0 0 15px #38bdf8;
     margin: 0 0 20px 0;
-    font-size: 28px;
+    font-size: 26px;
     letter-spacing: 2px;
 }
 
@@ -101,38 +108,33 @@ h2 {
     box-shadow: 0 0 20px #38bdf8;
 }
 
-/* Ayarlar Bölümü */
-.settings-label {
-    font-size: 12px;
-    margin-top: 10px;
-    color: #64748b;
-    text-transform: uppercase;
-}
-
-.difficulty-row {
-    display: flex;
-    gap: 5px;
-    margin-bottom: 15px;
-    margin-top: 10px;
+/* Market Izgarası ve Küçük Butonlar */
+.market-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin: 15px 0;
+    width: 90%;
 }
 
 .btn-small {
-    padding: 5px 12px;
+    padding: 8px 10px;
     font-size: 10px;
     width: auto;
     margin: 0;
+    min-width: 100px;
 }
 
 .active-opt {
-    background: #38bdf8;
-    color: #000;
+    background: #38bdf8 !important;
+    color: #000 !important;
 }
 
 /* Alt Linkler ve İmza */
 .apk-link {
     color: #64748b;
     text-decoration: none;
-    font-size: 11px;
+    font-size: 10px;
     margin-top: 15px;
     border-bottom: 1px solid #64748b;
     transition: 0.3s;
@@ -144,9 +146,17 @@ h2 {
 }
 
 .signature {
-    font-size: 9px;
+    font-size: 10px;
     margin-top: 25px;
     color: #38bdf8;
     opacity: 0.7;
     letter-spacing: 1px;
+    cursor: pointer;
+    user-select: none; /* Metnin seçilmesini engeller, tıklamayı kolaylaştırır */
 }
+
+.signature:hover {
+    opacity: 1;
+    text-shadow: 0 0 10px #38bdf8;
+}
+
