@@ -4,124 +4,124 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Cyber Snake - Tablet Power</title>
-    
     <link rel="manifest" href="manifest.json">
-    <meta name="theme-color" content="#38bdf8">
-    <link rel="apple-touch-icon" href="https://cyber-snake-nine.vercel.app/icon.png">
-
     <style>
         body {
-            background: #020617;
-            margin: 0; padding: 0;
+            background: #020617; margin: 0; padding: 0;
             display: flex; justify-content: center; align-items: center;
-            height: 100vh; color: #38bdf8;
-            font-family: 'Consolas', monospace;
+            height: 100vh; color: #38bdf8; font-family: 'Consolas', monospace;
             overflow: hidden; touch-action: none;
         }
-        .mobile-wrapper {
-            display: flex; flex-direction: column; align-items: center;
-            width: 95%; max-width: 400px;
-        }
-        .hud {
-            display: flex; justify-content: space-between;
-            width: 100%; margin-bottom: 15px;
-            font-weight: bold; letter-spacing: 1px;
-            text-shadow: 0 0 5px #38bdf8;
-        }
+        .mobile-wrapper { display: flex; flex-direction: column; align-items: center; width: 95%; max-width: 400px; }
+        .hud { display: flex; justify-content: space-between; width: 100%; margin-bottom: 10px; font-weight: bold; text-shadow: 0 0 5px #38bdf8; }
         .game-area { position: relative; width: 100%; aspect-ratio: 1 / 1; }
-        canvas {
-            background: #000; border: 2px solid #38bdf8;
-            width: 100%; height: 100%;
-            box-shadow: 0 0 30px rgba(56, 189, 248, 0.2);
-            border-radius: 8px;
-        }
-        #overlay {
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.85);
-            display: flex; flex-direction: column;
-            justify-content: center; align-items: center;
-            z-index: 10; text-align: center; border-radius: 8px;
-        }
-        #overlay.hidden { display: none; }
-        h2 { text-shadow: 0 0 10px #38bdf8; margin: 0; font-size: 24px; }
-        p { color: #64748b; font-size: 14px; margin-top: 8px; }
-
-        .btn-download {
-            margin-top: 15px; display: inline-block;
-            color: #38bdf8; text-decoration: none;
-            border: 2px solid #38bdf8; padding: 8px 15px;
-            border-radius: 5px; font-weight: bold; font-size: 12px;
-            text-shadow: 0 0 5px #38bdf8;
-            box-shadow: 0 0 10px rgba(56, 189, 248, 0.2);
-        }
+        canvas { background: #000; border: 2px solid #38bdf8; width: 100%; height: 100%; border-radius: 8px; }
         
-        /* BİLDİRİM BUTONU */
-        #notify-btn {
-            background: transparent; border: 1px solid #64748b;
-            color: #64748b; cursor: pointer; margin-top: 10px;
-            font-size: 10px; padding: 5px; border-radius: 3px;
+        /* MENÜ TASARIMI */
+        .menu-layer {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.9); display: flex; flex-direction: column;
+            justify-content: center; align-items: center; z-index: 20; border-radius: 8px;
         }
+        .hidden { display: none !important; }
+        
+        h2 { text-shadow: 0 0 15px #38bdf8; margin: 0 0 20px 0; font-size: 28px; }
+        
+        .btn {
+            background: transparent; color: #38bdf8; border: 2px solid #38bdf8;
+            padding: 12px 25px; margin: 8px; border-radius: 5px; font-weight: bold;
+            cursor: pointer; width: 200px; text-align: center; font-family: inherit;
+            transition: 0.3s; text-transform: uppercase;
+        }
+        .btn:active { background: #38bdf8; color: #000; box-shadow: 0 0 20px #38bdf8; }
+        
+        .settings-label { font-size: 12px; margin-top: 10px; color: #64748b; }
+        .difficulty-row { display: flex; gap: 5px; margin-bottom: 15px; }
+        .btn-small { padding: 5px 10px; font-size: 10px; width: auto; }
+        .active-opt { background: #38bdf8; color: #000; }
+
+        .apk-link { color: #64748b; text-decoration: none; font-size: 11px; margin-top: 15px; border-bottom: 1px solid #64748b; }
     </style>
 </head>
 <body>
 
 <div class="mobile-wrapper">
   <div class="hud">
-    <div class="stat">SCORE: <span id="score">000</span></div>
-    <div class="stat">BEST: <span id="highScore">000</span></div>
+    <div>SCORE: <span id="score">000</span></div>
+    <div>BEST: <span id="highScore">000</span></div>
   </div>
 
   <div class="game-area">
     <canvas id="cyberCanvas"></canvas>
-    <div id="overlay">
-      <h2 id="title">CYBER SNAKE</h2>
-      <p>BAŞLAMAK İÇİN EKRANI KAYDIRIN</p>
-      
-      <a href="https://github.com/aftonpurpleguy560-byte/Cyber-Snake/releases/download/v1.0/Cyber_Snake_signed.apk" class="btn-download">
-         ANDROID APK İNDİR
-      </a>
 
-      <button id="notify-btn" onclick="requestNotification()">BİLDİRİMLERİ AÇ</button>
+    <div id="mainMenu" class="menu-layer">
+      <h2>CYBER SNAKE</h2>
+      <button class="btn" onclick="startGame()">OYUNA BAŞLA</button>
+      <button class="btn" onclick="showSettings()">AYARLAR</button>
+      <a href="https://github.com/aftonpurpleguy560-byte/Cyber-Snake/releases/download/v1.0/Cyber_Snake_signed.apk" class="apk-link">ANDROID APK İNDİR</a>
+      <p style="font-size: 9px; margin-top: 20px;">Purpleguy © 2026 - tablet power</p>
+    </div>
 
-      <p style="font-size: 10px; margin-top: 20px; color: #38bdf8; opacity: 0.8;">Purpleguy © 2026 - tablet power</p>
+    <div id="settingsMenu" class="menu-layer hidden">
+      <h2>AYARLAR</h2>
+      <div class="settings-label">ZORLUK SEVİYESİ</div>
+      <div class="difficulty-row">
+        <button id="diff0" class="btn btn-small" onclick="setDiff(0)">KOLAY</button>
+        <button id="diff1" class="btn btn-small active-opt" onclick="setDiff(1)">ORTA</button>
+        <button id="diff2" class="btn btn-small" onclick="setDiff(2)">ZOR</button>
+      </div>
+      <button class="btn" onclick="hideSettings()">GERİ DÖN</button>
     </div>
   </div>
 </div>
 
 <script>
-// SERVICE WORKER KAYDI (PWA İÇİN)
-if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('sw.js')
-    .then(() => console.log("PWA Servis Kaydı Başarılı!"))
-    .catch(err => console.log("PWA Hatası:", err));
-}
-
-// BİLDİRİM İZNİ
-function requestNotification() {
-    Notification.requestPermission().then(perm => {
-        if(perm === 'granted') {
-            alert("Sistem Onaylandı: Bildirimler Aktif!");
-            document.getElementById('notify-btn').style.display = 'none';
-        }
-    });
-}
-
 const canvas = document.getElementById("cyberCanvas");
 const ctx = canvas.getContext("2d");
-const overlay = document.getElementById("overlay");
+const mainMenu = document.getElementById("mainMenu");
+const settingsMenu = document.getElementById("settingsMenu");
 
-canvas.width = 400;
-canvas.height = 400;
+canvas.width = 400; canvas.height = 400;
 const GRID = 20;
 
 let snake, food, dx, dy, score, gameActive = false;
-let speed = 130;
-let highScore = localStorage.getItem("cyberSwipeBest") || 0;
-document.getElementById("highScore").innerText = highScore.toString().padStart(3, '0');
+let currentSpeed = 130;
+let difficultyBase = 130;
+
+// SES EFEKTLERİ (AudioContext ile dosyasız ses üretimi)
+const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+function playSound(freq, type, duration) {
+    const osc = audioCtx.createOscillator();
+    const gain = audioCtx.createGain();
+    osc.type = type; osc.frequency.value = freq;
+    gain.gain.setValueAtTime(0.1, audioCtx.currentTime);
+    gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + duration);
+    osc.connect(gain); gain.connect(audioCtx.destination);
+    osc.start(); osc.stop(audioCtx.currentTime + duration);
+}
+
+// AYARLAR FONKSİYONLARI
+function showSettings() { mainMenu.classList.add("hidden"); settingsMenu.classList.remove("hidden"); }
+function hideSettings() { settingsMenu.classList.add("hidden"); mainMenu.classList.remove("hidden"); }
+
+function setDiff(level) {
+    const speeds = [180, 130, 80];
+    difficultyBase = speeds[level];
+    for(let i=0; i<3; i++) document.getElementById(`diff${i}`).classList.remove("active-opt");
+    document.getElementById(`diff${level}`).classList.add("active-opt");
+    playSound(440, 'sine', 0.1);
+}
+
+function startGame() {
+    mainMenu.classList.add("hidden");
+    init();
+    gameActive = true;
+    audioCtx.resume();
+}
 
 function init() {
   snake = [{x: 200, y: 200}, {x: 180, y: 200}];
-  dx = GRID; dy = 0; score = 0; speed = 130;
+  dx = GRID; dy = 0; score = 0; currentSpeed = difficultyBase;
   document.getElementById("score").innerText = "000";
   spawnFood();
 }
@@ -134,59 +134,39 @@ function spawnFood() {
   if(snake.some(s => s.x === food.x && s.y === food.y)) spawnFood();
 }
 
-let touchStartX = 0;
-let touchStartY = 0;
-
-window.addEventListener('touchstart', e => {
-    touchStartX = e.changedTouches[0].screenX;
-    touchStartY = e.changedTouches[0].screenY;
-}, {passive: false});
-
+// KONTROLLER (SWIPE)
+let touchStartX = 0, touchStartY = 0;
+window.addEventListener('touchstart', e => { touchStartX = e.changedTouches[0].screenX; touchStartY = e.changedTouches[0].screenY; }, {passive: false});
 window.addEventListener('touchend', e => {
-    let touchEndX = e.changedTouches[0].screenX;
-    let touchEndY = e.changedTouches[0].screenY;
-    handleSwipe(touchStartX, touchStartY, touchEndX, touchEndY);
-}, {passive: false});
-
-function handleSwipe(startX, startY, endX, endY) {
-    if (!gameActive) {
-        init();
-        gameActive = true;
-        overlay.classList.add("hidden");
-    }
-    const diffX = endX - startX;
-    const diffY = endY - startY;
+    if(!gameActive) return;
+    const diffX = e.changedTouches[0].screenX - touchStartX;
+    const diffY = e.changedTouches[0].screenY - touchStartY;
     if (Math.abs(diffX) > Math.abs(diffY)) {
-        if (Math.abs(diffX) < 30) return;
-        if (diffX > 0 && dx === 0) { dx = GRID; dy = 0; }
-        else if (diffX < 0 && dx === 0) { dx = -GRID; dy = 0; }
+        if (Math.abs(diffX) > 30 && dx === 0) { dx = diffX > 0 ? GRID : -GRID; dy = 0; }
     } else {
-        if (Math.abs(diffY) < 30) return;
-        if (diffY > 0 && dy === 0) { dx = 0; dy = GRID; }
-        else if (diffY < 0 && dy === 0) { dx = 0; dy = -GRID; }
+        if (Math.abs(diffY) > 30 && dy === 0) { dy = diffY > 0 ? GRID : -GRID; dx = 0; }
     }
-}
+}, {passive: false});
 
 function update() {
   if (!gameActive) return;
   const head = {x: snake[0].x + dx, y: snake[0].y + dy};
+
   if (head.x < 0 || head.x >= 400 || head.y < 0 || head.y >= 400 || 
       snake.some(s => s.x === head.x && s.y === head.y)) {
     gameActive = false;
-    overlay.classList.remove("hidden");
-    document.getElementById("title").innerText = "SYSTEM FAILURE";
-    if(score > highScore) {
-        highScore = score;
-        localStorage.setItem("cyberSwipeBest", highScore);
-        document.getElementById("highScore").innerText = highScore.toString().padStart(3, "0");
-    }
+    playSound(150, 'sawtooth', 0.5); // Yanma sesi
+    mainMenu.classList.remove("hidden");
+    document.getElementById("mainMenu").querySelector("h2").innerText = "SİSTEM ÇÖKTÜ";
     return;
   }
+
   snake.unshift(head);
   if (head.x === food.x && head.y === food.y) {
     score += 10;
+    playSound(880, 'square', 0.1); // Yemek yeme sesi
     document.getElementById("score").innerText = score.toString().padStart(3, '0');
-    if(speed > 60) speed -= 2;
+    if(currentSpeed > 50) currentSpeed -= 1;
     spawnFood();
   } else {
     snake.pop();
@@ -194,15 +174,13 @@ function update() {
 }
 
 function draw() {
-  ctx.fillStyle = "#000";
-  ctx.fillRect(0, 0, canvas.width, canvas.height);
+  ctx.fillStyle = "#000"; ctx.fillRect(0, 0, canvas.width, canvas.height);
   ctx.strokeStyle = "#0f172a";
   for(let i=0; i<400; i+=20) {
     ctx.beginPath(); ctx.moveTo(i,0); ctx.lineTo(i,400); ctx.stroke();
     ctx.beginPath(); ctx.moveTo(0,i); ctx.lineTo(400,i); ctx.stroke();
   }
-  ctx.fillStyle = "#fff";
-  ctx.shadowBlur = 10; ctx.shadowColor = "#38bdf8";
+  ctx.fillStyle = "#fff"; ctx.shadowBlur = 10; ctx.shadowColor = "#38bdf8";
   ctx.fillRect(food.x+5, food.y+5, GRID-10, GRID-10);
   snake.forEach((s, i) => {
     ctx.fillStyle = i === 0 ? "#38bdf8" : "#0c4a6e";
@@ -211,9 +189,10 @@ function draw() {
   ctx.shadowBlur = 0;
 }
 
-function loop() { update(); draw(); setTimeout(loop, speed); }
-init(); loop();
+function loop() { update(); draw(); setTimeout(loop, currentSpeed); }
+let highScore = localStorage.getItem("cyberSwipeBest") || 0;
+document.getElementById("highScore").innerText = highScore.toString().padStart(3, '0');
+loop();
 </script>
-
 </body>
 </html>
