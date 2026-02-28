@@ -4,8 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Cyber Snake - Tablet Power</title>
+    
     <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#38bdf8">
+    
     <style>
+        /* SİBER NEON TEMA */
         body {
             background: #020617; margin: 0; padding: 0;
             display: flex; justify-content: center; align-items: center;
@@ -15,23 +19,24 @@
         .mobile-wrapper { display: flex; flex-direction: column; align-items: center; width: 95%; max-width: 400px; }
         .hud { display: flex; justify-content: space-between; width: 100%; margin-bottom: 10px; font-weight: bold; text-shadow: 0 0 5px #38bdf8; }
         .game-area { position: relative; width: 100%; aspect-ratio: 1 / 1; }
-        canvas { background: #000; border: 2px solid #38bdf8; width: 100%; height: 100%; border-radius: 8px; }
+        canvas { background: #000; border: 2px solid #38bdf8; width: 100%; height: 100%; border-radius: 8px; box-shadow: 0 0 20px rgba(56, 189, 248, 0.1); }
         
-        /* MENÜ TASARIMI */
+        /* MENÜ KATMANLARI */
         .menu-layer {
             position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.9); display: flex; flex-direction: column;
+            background: rgba(0,0,0,0.92); display: flex; flex-direction: column;
             justify-content: center; align-items: center; z-index: 20; border-radius: 8px;
         }
         .hidden { display: none !important; }
         
         h2 { text-shadow: 0 0 15px #38bdf8; margin: 0 0 20px 0; font-size: 28px; }
         
+        /* BUTONLAR */
         .btn {
             background: transparent; color: #38bdf8; border: 2px solid #38bdf8;
             padding: 12px 25px; margin: 8px; border-radius: 5px; font-weight: bold;
             cursor: pointer; width: 200px; text-align: center; font-family: inherit;
-            transition: 0.3s; text-transform: uppercase;
+            transition: 0.2s; text-transform: uppercase;
         }
         .btn:active { background: #38bdf8; color: #000; box-shadow: 0 0 20px #38bdf8; }
         
@@ -41,25 +46,30 @@
         .active-opt { background: #38bdf8; color: #000; }
 
         .apk-link { color: #64748b; text-decoration: none; font-size: 11px; margin-top: 15px; border-bottom: 1px solid #64748b; }
+        .signature { font-size: 9px; margin-top: 25px; color: #38bdf8; opacity: 0.7; }
     </style>
 </head>
 <body>
 
 <div class="mobile-wrapper">
   <div class="hud">
-    <div>SCORE: <span id="score">000</span></div>
-    <div>BEST: <span id="highScore">000</span></div>
+    <div class="stat">SCORE: <span id="score">000</span></div>
+    <div class="stat">BEST: <span id="highScore">000</span></div>
   </div>
 
   <div class="game-area">
     <canvas id="cyberCanvas"></canvas>
 
     <div id="mainMenu" class="menu-layer">
-      <h2>CYBER SNAKE</h2>
+      <h2 id="menuTitle">CYBER SNAKE</h2>
       <button class="btn" onclick="startGame()">OYUNA BAŞLA</button>
       <button class="btn" onclick="showSettings()">AYARLAR</button>
-      <a href="https://github.com/aftonpurpleguy560-byte/Cyber-Snake/releases/download/v1.0/Cyber_Snake_signed.apk" class="apk-link">ANDROID APK İNDİR</a>
-      <p style="font-size: 9px; margin-top: 20px;">Purpleguy © 2026 - tablet power</p>
+      
+      <a href="https://github.com/aftonpurpleguy560-byte/Cyber-Snake/releases/download/v1.0/Cyber_Snake_signed.apk" class="apk-link">
+        ANDROID APK İNDİR
+      </a>
+      
+      <p class="signature">Purpleguy © 2026 - tablet power</p>
     </div>
 
     <div id="settingsMenu" class="menu-layer hidden">
@@ -75,124 +85,8 @@
   </div>
 </div>
 
-<script>
-const canvas = document.getElementById("cyberCanvas");
-const ctx = canvas.getContext("2d");
-const mainMenu = document.getElementById("mainMenu");
-const settingsMenu = document.getElementById("settingsMenu");
+<script src="script.js"></script>
 
-canvas.width = 400; canvas.height = 400;
-const GRID = 20;
-
-let snake, food, dx, dy, score, gameActive = false;
-let currentSpeed = 130;
-let difficultyBase = 130;
-
-// SES EFEKTLERİ (AudioContext ile dosyasız ses üretimi)
-const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-function playSound(freq, type, duration) {
-    const osc = audioCtx.createOscillator();
-    const gain = audioCtx.createGain();
-    osc.type = type; osc.frequency.value = freq;
-    gain.gain.setValueAtTime(0.1, audioCtx.currentTime);
-    gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + duration);
-    osc.connect(gain); gain.connect(audioCtx.destination);
-    osc.start(); osc.stop(audioCtx.currentTime + duration);
-}
-
-// AYARLAR FONKSİYONLARI
-function showSettings() { mainMenu.classList.add("hidden"); settingsMenu.classList.remove("hidden"); }
-function hideSettings() { settingsMenu.classList.add("hidden"); mainMenu.classList.remove("hidden"); }
-
-function setDiff(level) {
-    const speeds = [180, 130, 80];
-    difficultyBase = speeds[level];
-    for(let i=0; i<3; i++) document.getElementById(`diff${i}`).classList.remove("active-opt");
-    document.getElementById(`diff${level}`).classList.add("active-opt");
-    playSound(440, 'sine', 0.1);
-}
-
-function startGame() {
-    mainMenu.classList.add("hidden");
-    init();
-    gameActive = true;
-    audioCtx.resume();
-}
-
-function init() {
-  snake = [{x: 200, y: 200}, {x: 180, y: 200}];
-  dx = GRID; dy = 0; score = 0; currentSpeed = difficultyBase;
-  document.getElementById("score").innerText = "000";
-  spawnFood();
-}
-
-function spawnFood() {
-  food = {
-    x: Math.floor(Math.random() * (canvas.width / GRID)) * GRID,
-    y: Math.floor(Math.random() * (canvas.height / GRID)) * GRID
-  };
-  if(snake.some(s => s.x === food.x && s.y === food.y)) spawnFood();
-}
-
-// KONTROLLER (SWIPE)
-let touchStartX = 0, touchStartY = 0;
-window.addEventListener('touchstart', e => { touchStartX = e.changedTouches[0].screenX; touchStartY = e.changedTouches[0].screenY; }, {passive: false});
-window.addEventListener('touchend', e => {
-    if(!gameActive) return;
-    const diffX = e.changedTouches[0].screenX - touchStartX;
-    const diffY = e.changedTouches[0].screenY - touchStartY;
-    if (Math.abs(diffX) > Math.abs(diffY)) {
-        if (Math.abs(diffX) > 30 && dx === 0) { dx = diffX > 0 ? GRID : -GRID; dy = 0; }
-    } else {
-        if (Math.abs(diffY) > 30 && dy === 0) { dy = diffY > 0 ? GRID : -GRID; dx = 0; }
-    }
-}, {passive: false});
-
-function update() {
-  if (!gameActive) return;
-  const head = {x: snake[0].x + dx, y: snake[0].y + dy};
-
-  if (head.x < 0 || head.x >= 400 || head.y < 0 || head.y >= 400 || 
-      snake.some(s => s.x === head.x && s.y === head.y)) {
-    gameActive = false;
-    playSound(150, 'sawtooth', 0.5); // Yanma sesi
-    mainMenu.classList.remove("hidden");
-    document.getElementById("mainMenu").querySelector("h2").innerText = "SİSTEM ÇÖKTÜ";
-    return;
-  }
-
-  snake.unshift(head);
-  if (head.x === food.x && head.y === food.y) {
-    score += 10;
-    playSound(880, 'square', 0.1); // Yemek yeme sesi
-    document.getElementById("score").innerText = score.toString().padStart(3, '0');
-    if(currentSpeed > 50) currentSpeed -= 1;
-    spawnFood();
-  } else {
-    snake.pop();
-  }
-}
-
-function draw() {
-  ctx.fillStyle = "#000"; ctx.fillRect(0, 0, canvas.width, canvas.height);
-  ctx.strokeStyle = "#0f172a";
-  for(let i=0; i<400; i+=20) {
-    ctx.beginPath(); ctx.moveTo(i,0); ctx.lineTo(i,400); ctx.stroke();
-    ctx.beginPath(); ctx.moveTo(0,i); ctx.lineTo(400,i); ctx.stroke();
-  }
-  ctx.fillStyle = "#fff"; ctx.shadowBlur = 10; ctx.shadowColor = "#38bdf8";
-  ctx.fillRect(food.x+5, food.y+5, GRID-10, GRID-10);
-  snake.forEach((s, i) => {
-    ctx.fillStyle = i === 0 ? "#38bdf8" : "#0c4a6e";
-    ctx.fillRect(s.x+1, s.y+1, GRID-2, GRID-2);
-  });
-  ctx.shadowBlur = 0;
-}
-
-function loop() { update(); draw(); setTimeout(loop, currentSpeed); }
-let highScore = localStorage.getItem("cyberSwipeBest") || 0;
-document.getElementById("highScore").innerText = highScore.toString().padStart(3, '0');
-loop();
-</script>
 </body>
 </html>
+
