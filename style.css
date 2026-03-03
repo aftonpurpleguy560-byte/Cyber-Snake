@@ -1,9 +1,9 @@
-/* CYBER SNAKE - GÖRSEL TASARIM v1.3
+/* CYBER SNAKE - GÖRSEL TASARIM v1.4
    Purpleguy © 2026 - tablet power 
 */
 
 body {
-    background: #000; /* İstediğin gibi zifiri siyah */
+    background: #000; /* Zifiri siyah arka plan */
     margin: 0;
     padding: 0;
     display: flex;
@@ -13,7 +13,7 @@ body {
     color: #38bdf8;
     font-family: 'Consolas', 'Courier New', monospace;
     overflow: hidden;
-    touch-action: none; /* Mobilde sayfanın kaymasını engeller */
+    touch-action: none;
 }
 
 .mobile-wrapper {
@@ -24,7 +24,7 @@ body {
     max-width: 400px;
 }
 
-/* HUD (Skor, Para ve Rekor Alanı) */
+/* Üst Panel (Skor ve Nakit) */
 .hud {
     display: flex;
     justify-content: space-between;
@@ -34,11 +34,6 @@ body {
     text-shadow: 0 0 5px #38bdf8;
     font-size: 11px;
     letter-spacing: 1px;
-}
-
-.money-val {
-    color: #fbbf24; /* Para rengi altın sarısı */
-    text-shadow: 0 0 8px #fbbf24;
 }
 
 .game-area {
@@ -54,17 +49,17 @@ canvas {
     width: 100%;
     height: 100%;
     border-radius: 8px;
-    box-shadow: 0 0 20px rgba(56, 189, 248, 0.15);
+    box-shadow: 0 0 20px rgba(56, 189, 248, 0.2);
 }
 
-/* Menü Katmanları (Ana Menü, Market, Ayarlar) */
+/* Menü Katmanları */
 .menu-layer {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.95); /* Menü açılınca arka plan daha koyu */
+    background: rgba(0, 0, 0, 0.95);
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -82,15 +77,14 @@ h2 {
     text-shadow: 0 0 15px #38bdf8;
     margin: 0 0 20px 0;
     font-size: 26px;
-    letter-spacing: 2px;
 }
 
-/* Buton Tasarımları */
+/* Butonlar */
 .btn {
     background: transparent;
     color: #38bdf8;
     border: 2px solid #38bdf8;
-    padding: 12px 25px;
+    padding: 12px;
     margin: 8px;
     border-radius: 5px;
     font-weight: bold;
@@ -108,7 +102,7 @@ h2 {
     box-shadow: 0 0 20px #38bdf8;
 }
 
-/* Market Izgarası ve Küçük Butonlar */
+/* Market Düzeni */
 .market-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -118,41 +112,21 @@ h2 {
 }
 
 .btn-small {
-    padding: 8px 10px;
+    padding: 8px;
     font-size: 10px;
     width: auto;
-    margin: 0;
     min-width: 100px;
 }
 
-.active-opt {
-    background: #38bdf8 !important;
-    color: #000 !important;
-}
-
-/* Alt Linkler ve İmza */
-.apk-link {
-    color: #64748b;
-    text-decoration: none;
-    font-size: 10px;
-    margin-top: 15px;
-    border-bottom: 1px solid #64748b;
-    transition: 0.3s;
-}
-
-.apk-link:hover {
-    color: #38bdf8;
-    border-color: #38bdf8;
-}
-
+/* İmza ve Gizli Buton */
 .signature {
     font-size: 10px;
     margin-top: 25px;
     color: #38bdf8;
     opacity: 0.7;
-    letter-spacing: 1px;
     cursor: pointer;
-    user-select: none; /* Metnin seçilmesini engeller, tıklamayı kolaylaştırır */
+    user-select: none;
+    transition: 0.3s;
 }
 
 .signature:hover {
