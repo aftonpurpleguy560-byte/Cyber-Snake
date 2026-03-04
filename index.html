@@ -30,20 +30,22 @@
             <h2>SİBER MARKET</h2>
             <p style="color:#fbbf24; font-size: 14px;">BAKİYE: $<span id="marketMoney">0</span></p>
             <div class="market-grid">
-                <button class="btn btn-small" onclick="buySkin('#38bdf8', 0)">MAVİ (0)</button>
-                <button class="btn btn-small" style="border-color:#fbbf24" onclick="buySkin('#fbbf24', 50)">SARI (50)</button>
-                <button class="btn btn-small" style="border-color:#ef4444" onclick="buySkin('#ef4444', 50)">KIRMIZI (50)</button>
-                <button class="btn btn-small" style="border-color:#a855f7" onclick="buySkin('#a855f7', 50)">MOR (50)</button>
+                <button class="btn btn-small" onclick="buySkin('#38bdf8', 0)">MAVİ (Free)</button>
+                <button class="btn btn-small" style="border-color:#fbbf24" onclick="buySkin('#fbbf24', 50)">SARI ($50)</button>
+                <button class="btn btn-small" style="border-color:#ef4444" onclick="buySkin('#ef4444', 50)">KIRMIZI ($50)</button>
+                <button class="btn btn-small" style="border-color:#a855f7" onclick="buySkin('#a855f7', 50)">MOR ($50)</button>
             </div>
-            <button class="btn" onclick="hideMarket()">GERİ DÖN</button>
+            <button class="btn" onclick="hideMarket()">ANA MENÜYE DÖN</button>
         </div>
 
         <div id="settingsMenu" class="menu-layer hidden">
-            <h2>AYARLAR</h2>
-            <button class="btn btn-small" onclick="setDiff(0)">KOLAY</button>
-            <button class="btn btn-small" onclick="setDiff(1)">ORTA</button>
-            <button class="btn btn-small" onclick="setDiff(2)">ZOR</button>
-            <br><br>
+            <h2>ZORLUK SEVİYESİ</h2>
+            <div class="market-grid">
+                <button class="btn btn-small" onclick="setDiff(0)">KOLAY</button>
+                <button class="btn btn-small" onclick="setDiff(1)">ORTA</button>
+                <button class="btn btn-small" onclick="setDiff(2)">ZOR</button>
+            </div>
+            <br>
             <button class="btn" onclick="hideSettings()">GERİ DÖN</button>
         </div>
     </div>
@@ -52,4 +54,3 @@
 <script src="script.js"></script>
 </body>
 </html>
-
