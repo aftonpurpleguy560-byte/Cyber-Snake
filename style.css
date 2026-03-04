@@ -1,9 +1,9 @@
-/* CYBER SNAKE - GÖRSEL TASARIM v1.4
+/* CYBER SNAKE - THE FINAL STYLE
    Purpleguy © 2026 - tablet power 
 */
 
 body {
-    background: #000; /* Zifiri siyah arka plan */
+    background: #000; /* Zifiri siyah */
     margin: 0;
     padding: 0;
     display: flex;
@@ -13,7 +13,7 @@ body {
     color: #38bdf8;
     font-family: 'Consolas', 'Courier New', monospace;
     overflow: hidden;
-    touch-action: none;
+    touch-action: none; /* Sayfa kaymasını engeller */
 }
 
 .mobile-wrapper {
@@ -24,7 +24,7 @@ body {
     max-width: 400px;
 }
 
-/* Üst Panel (Skor ve Nakit) */
+/* Üst Panel (HUD) */
 .hud {
     display: flex;
     justify-content: space-between;
@@ -42,7 +42,7 @@ body {
     aspect-ratio: 1 / 1;
 }
 
-/* Oyun Ekranı */
+/* Canvas / Oyun Alanı */
 canvas {
     background: #000;
     border: 2px solid #38bdf8;
@@ -76,10 +76,11 @@ canvas {
 h2 {
     text-shadow: 0 0 15px #38bdf8;
     margin: 0 0 20px 0;
-    font-size: 26px;
+    font-size: 24px;
+    text-transform: uppercase;
 }
 
-/* Butonlar */
+/* Buton Tasarımları */
 .btn {
     background: transparent;
     color: #38bdf8;
@@ -102,12 +103,12 @@ h2 {
     box-shadow: 0 0 20px #38bdf8;
 }
 
-/* Market Düzeni */
+/* Izgara Düzeni (Market ve Ayarlar İçin) */
 .market-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 10px;
-    margin: 15px 0;
+    margin: 10px 0;
     width: 90%;
 }
 
@@ -118,7 +119,7 @@ h2 {
     min-width: 100px;
 }
 
-/* İmza ve Gizli Buton */
+/* İmza Alanı */
 .signature {
     font-size: 10px;
     margin-top: 25px;
@@ -126,11 +127,10 @@ h2 {
     opacity: 0.7;
     cursor: pointer;
     user-select: none;
-    transition: 0.3s;
+    letter-spacing: 1px;
 }
 
 .signature:hover {
     opacity: 1;
     text-shadow: 0 0 10px #38bdf8;
 }
-
