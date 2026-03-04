@@ -176,3 +176,4 @@ function loop() {
 // PARA GÖSTERGESİNİ YÜKLE VE DÖNGÜYÜ BAŞLAT
 document.getElementById("moneyDisplay").innerText = money;
 loop();
+
