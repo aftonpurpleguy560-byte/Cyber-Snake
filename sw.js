@@ -1,15 +1,24 @@
-self.addEventListener('install', (e) => {
-  console.log('Cyber Snake Service Worker Kuruldu!');
+const CACHE_NAME = 'cyber-snake-v1';
+const assets = [
+  '/',
+  '/index.html',
+  '/style.css',
+  '/script.js',
+  '/manifest.json'
+];
+
+self.addEventListener('install', event => {
+  event.waitUntil(
+    caches.open(CACHE_NAME).then(cache => {
+      return cache.addAll(assets);
+    })
+  );
 });
 
-// Basit bir bildirim gönderme fonksiyonu
-self.addEventListener('push', (e) => {
-  const options = {
-    body: 'Yeni rekor kırmaya hazır mısın?',
-    icon: 'icon.png',
-    vibrate: [100, 50, 100],
-    data: { dateOfArrival: Date.now() }
-  };
-  e.waitUntil(self.registration.showNotification('Cyber Snake', options));
+self.addEventListener('fetch', event => {
+  event.respondWith(
+    caches.match(event.request).then(response => {
+      return response || fetch(event.request);
+    })
+  );
 });
-
