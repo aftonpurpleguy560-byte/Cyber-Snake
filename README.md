@@ -1,43 +1,44 @@
-# 🐍 CYBER SNAKE - TABLET POWER
+# 🐍 Cyber Snake - Tablet Power Edition
 
-![Cyber Snake Banner](https://img.shields.io/badge/Version-1.0.0-blue?style=for-the-badge&logo=android)
-![Platform](https://img.shields.io/badge/Platform-Galaxy%20Store-orange?style=for-the-badge&logo=samsung)
-![Author](https://img.shields.io/badge/Author-Purpleguy%20%C2%A9%202026-blueviolet?style=for-the-badge)
-
-**Cyber Snake**, klasik yılan oyununun modern, neon estetiği ve mobil cihazlar için optimize edilmiş dokunmatik (swipe) kontrollerle yeniden yorumlanmış halidir.
+**Cyber Snake**, siber estetik ve gelişmiş oyun mekanikleriyle donatılmış, mobil uyumlu bir yılan oyunudur. **Purpleguy © 2026 - tablet power** tarafından Efe için özel olarak optimize edilmiştir.
 
 ---
 
-## 🚀 Özellikler
+## ⚡ Özellikler
 
-* **Cyber-Neon Görseller:** Tamamen karanlık mod uyumlu, göz yormayan neon grafikler.
-* **Swipe Kontroller:** Tablet ve telefonlar için özel olarak geliştirilmiş hassas kaydırma mekaniği.
-* **Dinamik Zorluk:** Puan kazandıkça artan hız ve zorluk seviyesi.
-* **High Score Sistemi:** En yüksek skorunuz cihazınızda (`localStorage`) saklanır.
-* **Hafif ve Hızlı:** Sadece HTML, CSS ve JavaScript kullanılarak yapıldı, ekstra kütüphane gerektirmez.
-
----
-
-## 🛠️ Teknik Detaylar
-
-Oyunun geliştirilme sürecinde kullanılan araçlar:
-* **Kodlama:** CodePen & Tablet Editor
-* **Paketleme:** Web2App / Website 2 APK Builder
-* **Düzenleme:** MT Manager
-* **Yayın:** Vercel & Galaxy Store
+* **Siber Market:** Kazandığın nakitlerle yılanın için yeni siber görünümler (skin) satın al.
+* **14 Çeşit Öğe:** * 🍎 **10 Farklı Yemek:** Her biri farklı skor ve nakit puan verir.
+    * ⚡ **4 Güçlendirici:** Hız artırıcılar ve yavaşlatıcılar ile oyuna strateji kat.
+* **Swipe Kontrolü:** Tablet ve telefonlar için optimize edilmiş parmak kaydırma desteği.
+* **Firebase Entegrasyonu:** Skorlarını buluta (mc-craftle projesi) yedekle.
+* **PWA Desteği:** "Ana Ekrana Ekle" diyerek bir mobil uygulama gibi internet olmasa bile oyna.
+* **Zorluk Ayarları:** Ayarlar menüsünden Kolay, Orta veya Zor seviyesini seç.
+* **Gizli God Mode:** İmza alanına 3 kez tıklayarak ölümsüzlüğü aktif et!
 
 ---
 
-## 📦 Kurulum ve Geliştirme
+## 🛠️ Kurulum ve Yayınlama
 
-1. Bu depoyu klonlayın veya `index.html` dosyasını indirin.
-2. Herhangi bir modern web tarayıcısında (Chrome, Samsung Internet vb.) açın.
-3. MT Manager kullanarak `assets` klasörü üzerinden özelleştirmeler yapabilirsiniz.
+1.  Bu depodaki tüm dosyaları (`index.html`, `style.css`, `script.js`, `sw.js`, `manifest.json`) indirin.
+2.  Dosyaları GitHub deponuza yükleyin.
+3.  Vercel üzerinden deponuzu bağlayın.
+4.  Tarayıcıdan Vercel linkinize gidin ve siber dünyaya giriş yapın.
+
+---
+
+## 🎮 Kontroller
+
+* **Mobil/Tablet:** Parmağını gitmek istediğin yöne doğru kaydır (Swipe).
+* **PC:** Ok tuşlarını kullanarak yılanı yönlendir.
 
 ---
 
 ## 📜 Lisans ve İmza
 
-Bu proje **Efe** tarafından geliştirilmiştir.
+Bu proje **Efe** adına geliştirilmiştir. 
 
-**Purpleguy © 2026 - tablet power** *Telif hakkı saklıdır. İzinsiz kopyalanamaz veya değiştirilemez.*
+> **Signature:** `Purpleguy © 2026 - tablet power`
+
+---
+
+*Not: Firebase kotası dolsa bile sistem yerel depolama (Local Storage) üzerinden çalışmaya devam eder.*
