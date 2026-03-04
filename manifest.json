@@ -1,14 +1,15 @@
 {
-  "name": "Cyber Snake Mobile",
+  "name": "Cyber Snake",
   "short_name": "CyberSnake",
   "start_url": "index.html",
   "display": "standalone",
-  "background_color": "#020617",
+  "background_color": "#000000",
   "theme_color": "#38bdf8",
+  "orientation": "portrait",
   "icons": [
     {
-      "src": "https://cyber-snake-nine.vercel.app/icon.png",
-      "sizes": "192x192",
+      "src": "https://cdn-icons-png.flaticon.com/512/528/528105.png",
+      "sizes": "512x512",
       "type": "image/png"
     }
   ]
