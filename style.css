@@ -1,53 +1,58 @@
 body {
-    background: #000;
-    margin: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    font-family: 'Consolas', monospace;
-    touch-action: none;
-    overflow: hidden;
+  background: #000;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  color: #a855f7; /* Purpleguy Moru */
+  font-family: 'Consolas', monospace;
+  overflow: hidden;
+  touch-action: none;
 }
 
-.watch-frame {
-    position: relative;
-    width: 320px; 
-    height: 385px; 
-    background: #000;
-    border: 1px solid #7e22ce;
-    overflow: hidden;
-    box-shadow: inset 0 0 20px #581c87;
+.watch-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 320px; /* Watch 5 Active genişliği */
 }
 
 .hud {
-    position: absolute;
-    top: 8px;
-    width: 100%;
-    display: flex;
-    justify-content: space-around;
-    color: #d8b4fe;
-    font-size: 12px;
-    z-index: 5;
-    text-shadow: 0 0 5px #7e22ce;
-    pointer-events: none;
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  margin-bottom: 5px;
+  font-weight: bold;
+  font-size: 14px;
+  text-shadow: 0 0 5px #7e22ce;
+}
+
+.game-area { 
+  position: relative; 
+  width: 320px; 
+  height: 385px; /* Watch 5 Active yüksekliği */
 }
 
 canvas {
-    display: block;
+  background: #000;
+  border: 1px solid #7e22ce;
+  width: 100%;
+  height: 100%;
+  box-shadow: 0 0 15px rgba(168, 85, 247, 0.3);
 }
 
 #overlay {
-    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-    background: rgba(0,0,0,0.9);
-    display: flex; flex-direction: column;
-    justify-content: center; align-items: center;
-    z-index: 10;
-    text-align: center;
+  position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+  background: rgba(0,0,0,0.9);
+  display: flex; flex-direction: column;
+  justify-content: center; align-items: center;
+  z-index: 10;
+  text-align: center;
 }
 
-h1 { color: #a855f7; font-size: 20px; margin: 0; text-shadow: 0 0 10px #a855f7; }
-p { color: #6b7280; font-size: 10px; margin-top: 8px; letter-spacing: 1px; }
-.signature { color: #581c87; font-size: 9px; margin-top: 15px; font-weight: bold; }
-.hidden { display: none !important; }
+#overlay.hidden { display: none; }
+h2 { text-shadow: 0 0 10px #a855f7; margin: 0; font-size: 20px; color: #d8b4fe; }
+p { color: #64748b; font-size: 10px; margin-top: 8px; }
+.dev-sign { color: #581c87; font-size: 9px; margin-top: 15px; font-weight: bold; }
 
