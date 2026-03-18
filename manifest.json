@@ -1,17 +1,21 @@
 {
-  "name": "Cyber Snake",
-  "short_name": "CyberSnake",
-  "start_url": "index.html",
-  "display": "standalone",
-  "background_color": "#000000",
-  "theme_color": "#38bdf8",
-  "orientation": "portrait",
+  "short_name": "PurpleSnake",
+  "name": "Purple Snake - Watch Edition",
   "icons": [
     {
-      "src": "https://cdn-icons-png.flaticon.com/512/528/528105.png",
-      "sizes": "512x512",
-      "type": "image/png"
+      "src": "https://placehold.co/192x192/000000/a855f7?text=PS",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "https://placehold.co/512x512/000000/a855f7?text=PurpleSnake",
+      "type": "image/png",
+      "sizes": "512x512"
     }
-  ]
+  ],
+  "start_url": "./index.html",
+  "background_color": "#000000",
+  "display": "standalone",
+  "theme_color": "#a855f7",
+  "orientation": "portrait"
 }
-
