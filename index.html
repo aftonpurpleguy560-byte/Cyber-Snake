@@ -3,20 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Purple Snake - Watch Edition</title>
+    <title>Purple Snake - Watch Pro</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="manifest" href="manifest.json">
 </head>
 <body>
-    <div class="watch-frame">
+    <div class="watch-container">
         <div class="hud">
-            <span>SCORE: <id id="score">00</id></span>
-            <span>BEST: <id id="highScore">00</id></span>
+            <div class="stat">S: <span id="score">000</span></div>
+            <div class="stat">B: <span id="highScore">000</span></div>
         </div>
-        <canvas id="cyberCanvas"></canvas>
-        <div id="overlay">
-            <h1>PURPLE SNAKE</h1>
-            <p>SWIPE TO START</p>
-            <div class="signature">Purpleguy © 2026</div>
+
+        <div class="game-area">
+            <canvas id="cyberCanvas"></canvas>
+            <div id="overlay">
+                <h2 id="title">PURPLE SNAKE</h2>
+                <p>KAYDIR VE BAŞLAT</p>
+                <div class="dev-sign">Purpleguy © 2026</div>
+            </div>
         </div>
     </div>
     <script src="script.js"></script>
