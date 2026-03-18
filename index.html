@@ -3,91 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Cyber Snake - Tablet Power</title>
-    
-    <link rel="manifest" href="manifest.json">
-    <meta name="theme-color" content="#38bdf8">
+    <title>Purple Snake - Watch Edition</title>
     <link rel="stylesheet" href="style.css">
-
-    <script type="module">
-      import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-      import { getDatabase, ref, set, get } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
-
-      // Senin Config Bilgilerin
-      const firebaseConfig = {
-        apiKey: "AIzaSyBvkxrjBY2pVLNo6fmjGpinlXcPmy5Mc_A",
-        authDomain: "mc-craftle.firebaseapp.com",
-        projectId: "mc-craftle",
-        storageBucket: "mc-craftle.firebasestorage.app",
-        messagingSenderId: "593377101435",
-        appId: "1:593377101435:web:053380c4b753b11fea44de"
-      };
-
-      // Firebase Başlatma
-      const app = initializeApp(firebaseConfig);
-      const db = getDatabase(app);
-
-      // Global erişim (script.js'den kullanabilmen için)
-      window.db = db;
-      window.dbRef = ref;
-      window.dbSet = set;
-      window.dbGet = get;
-    </script>
 </head>
 <body>
-
-<div id="cyber-toast">SİSTEM MESAJI</div>
-
-<div class="mobile-wrapper">
-    <div class="hud">
-        <div>SCORE: <span id="score">000</span></div>
-        <div>CASH: $<span id="moneyDisplay" style="color: #fbbf24;">0</span></div>
-        <div>BEST: <span id="highScore">000</span></div>
-    </div>
-
-    <div class="game-area">
+    <div class="watch-frame">
+        <div class="hud">
+            <span>SCORE: <id id="score">00</id></span>
+            <span>BEST: <id id="highScore">00</id></span>
+        </div>
         <canvas id="cyberCanvas"></canvas>
-        
-        <div id="mainMenu" class="menu-layer">
-            <h2 id="menuTitle">CYBER SNAKE</h2>
-            <button class="btn" onclick="startGame()">SİSTEMİ BAŞLAT</button>
-            <button class="btn" onclick="showMarket()">SİBER MARKET</button>
-            <button class="btn" onclick="showSettings()">AYARLAR</button>
-            <p class="signature" onclick="toggleGodMode()">Purpleguy © 2026 - tablet power</p>
-        </div>
-
-        <div id="marketMenu" class="menu-layer hidden">
-            <h2>SİBER MARKET</h2>
-            <p style="color:#fbbf24; font-size: 14px;">BAKİYE: $<span id="marketMoney">0</span></p>
-            <div class="market-grid">
-                <button class="btn btn-small" onclick="buySkin('#38bdf8', 0)">MAVİ (Free)</button>
-                <button class="btn btn-small" style="border-color:#fbbf24" onclick="buySkin('#fbbf24', 50)">SARI ($50)</button>
-                <button class="btn btn-small" style="border-color:#ef4444" onclick="buySkin('#ef4444', 50)">KIRMIZI ($50)</button>
-                <button class="btn btn-small" style="border-color:#a855f7" onclick="buySkin('#a855f7', 50)">MOR ($50)</button>
-            </div>
-            <button class="btn" onclick="hideMarket()">ANA MENÜYE DÖN</button>
-        </div>
-
-        <div id="settingsMenu" class="menu-layer hidden">
-            <h2>ZORLUK SEVİYESİ</h2>
-            <div class="market-grid">
-                <button class="btn btn-small" onclick="setDiff(0)">KOLAY</button>
-                <button class="btn btn-small" onclick="setDiff(1)">ORTA</button>
-                <button class="btn btn-small" onclick="setDiff(2)">ZOR</button>
-            </div>
-            <button class="btn" onclick="hideSettings()">GERİ DÖN</button>
+        <div id="overlay">
+            <h1>PURPLE SNAKE</h1>
+            <p>SWIPE TO START</p>
+            <div class="signature">Purpleguy © 2026</div>
         </div>
     </div>
-</div>
-
-<script>
-  if ('serviceWorker' in navigator) {
-    window.addEventListener('load', () => {
-      navigator.serviceWorker.register('./sw.js');
-    });
-  }
-</script>
-
-<script src="script.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
